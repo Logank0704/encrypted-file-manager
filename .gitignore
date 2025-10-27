@@ -23,3 +23,22 @@ yarn-error.log*
 # IDE
 .vscode/
 .idea/
+
+# Java / Maven
+target/
+*.jar
+*.war
+*.log
+
+# Node / Next.js
+node_modules/
+.next/
+dist/
+out/
+.env
+.env.local
+
+# IDE / System
+.vscode/
+.idea/
+.DS_Store
