@@ -1,0 +1,11 @@
+/Users/logan/dev-projects/encrypted-file-manager/apps/api-java/src/main/java/com/kc/encrypted/efm/EfmApplication.java
+/Users/logan/dev-projects/encrypted-file-manager/apps/api-java/src/main/java/com/kc/encrypted/efm/config/AppConfig.java
+/Users/logan/dev-projects/encrypted-file-manager/apps/api-java/src/main/java/com/kc/encrypted/efm/config/S3Config.java
+/Users/logan/dev-projects/encrypted-file-manager/apps/api-java/src/main/java/com/kc/encrypted/efm/controller/FileController.java
+/Users/logan/dev-projects/encrypted-file-manager/apps/api-java/src/main/java/com/kc/encrypted/efm/controller/HealthController.java
+/Users/logan/dev-projects/encrypted-file-manager/apps/api-java/src/main/java/com/kc/encrypted/efm/domain/StoredFile.java
+/Users/logan/dev-projects/encrypted-file-manager/apps/api-java/src/main/java/com/kc/encrypted/efm/repository/StoredFileRepository.java
+/Users/logan/dev-projects/encrypted-file-manager/apps/api-java/src/main/java/com/kc/encrypted/efm/service/CryptoService.java
+/Users/logan/dev-projects/encrypted-file-manager/apps/api-java/src/main/java/com/kc/encrypted/efm/service/StorageService.java
+/Users/logan/dev-projects/encrypted-file-manager/apps/api-java/src/main/java/com/kc/encrypted/efm/util/IoUtils.java
+/Users/logan/dev-projects/encrypted-file-manager/apps/api-java/src/main/java/com/kc/encrypted/efm/util/KeyUtils.java

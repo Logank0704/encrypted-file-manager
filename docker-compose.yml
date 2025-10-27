@@ -1,0 +1,72 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: efm-postgres
+    environment:
+      POSTGRES_DB: efm
+      POSTGRES_USER: efm_user
+      POSTGRES_PASSWORD: efm_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U efm_user -d efm"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  minio:
+    image: minio/minio:latest
+    container_name: efm-minio
+    environment:
+      MINIO_ROOT_USER: efmadmin
+      MINIO_ROOT_PASSWORD: efmadmin123
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"   # S3 API
+      - "9001:9001"   # Web console
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  api:
+    build:
+      context: ./apps/api-java
+      dockerfile: Dockerfile
+    container_name: efm-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    environment:
+      # DB
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/efm
+      SPRING_DATASOURCE_USERNAME: efm_user
+      SPRING_DATASOURCE_PASSWORD: efm_pass
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+      # Crypto key (demo)
+      APP_MASTER_KEY: 000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f
+
+      # ✅ S3/MinIO (env-var style so Spring maps them)
+      S3_ENABLED: "true"
+      S3_ENDPOINT: http://minio:9000
+      S3_ACCESSKEY: efmadmin
+      S3_SECRETKEY: efmadmin123
+      S3_REGION: us-east-1
+      S3_BUCKET: efm-blobs
+    ports:
+      - "8080:8080"
+    volumes:
+      - api-data:/app/data
+
+volumes:
+  pgdata:
+  minio-data:
+  api-data:
