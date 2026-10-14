@@ -51,8 +51,8 @@ services:
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
 
-      # Crypto key (demo)
-      APP_MASTER_KEY: 000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f
+      # DEMO-ONLY key (sequential bytes, NOT secret). Generate your own: openssl rand -hex 32
+      APP_MASTER_KEY: ${APP_MASTER_KEY:-000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f}
 
       # ✅ S3/MinIO (env-var style so Spring maps them)
       S3_ENABLED: "true"

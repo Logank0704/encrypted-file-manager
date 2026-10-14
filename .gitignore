@@ -42,3 +42,9 @@ out/
 .vscode/
 .idea/
 .DS_Store
+
+# Local data / runtime
+apps/api-java/data/
+apps/api-java/.local/
+*.bin
+dracula-out.txt
